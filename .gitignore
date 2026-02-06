@@ -1,0 +1,59 @@
+# --- SECRETS & AUTH ---
+.env
+.env.*
+*.pem
+*.key
+*.pub
+*.p12
+id_rsa
+secrets.py
+config.py
+credentials.json
+auth_tokens.txt
+
+# --- CLOUD & INFRA ---
+.aws/
+.azure/
+.gcp/
+kubeconfig
+*.tfstate
+*.tfstate.backup
+
+# --- TARGETS & OSINT DATA ---
+targets.txt
+ips.txt
+users.txt
+passwords.txt
+scope.txt
+payloads/
+wordlists/
+
+# --- TOOL OUTPUTS & REPORTS ---
+*.pcap
+*.pcapng
+*.cap
+*.nessus
+*.log
+nmap_scans/
+reports/
+logs/
+
+# --- MALWARE & BINARIES ---
+malware_samples/
+bin/
+obj/
+*.exe
+*.dll
+*.so
+*.bin
+*.elf
+
+# --- LANGUAGES & IDEs ---
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

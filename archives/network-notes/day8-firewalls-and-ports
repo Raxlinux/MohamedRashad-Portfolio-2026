@@ -1,0 +1,100 @@
+## Day 8: The Perimeter (Firewall Architectures) & Common Ports
+
+### Summary:
+
+After spending yesterday looking at how devices chat via ARP, today I shifted to the "Gatekeeper." If ARP is the phonebook of the local network, the Firewall is the security guard standing at the door deciding who gets to enter.
+
+I focused on the evolution of firewall logic—moving from simple "allow/deny" lists based on IP addresses to modern systems that can actually "read" the intent of the traffic at the Application Layer. I’ve mapped out the theoretical differences between the four major types of firewalls to prepare for my upcoming live traffic capture and rule-testing lab.
+
+### What I Covered:
+
+**1. Packet Filtering Firewall (The Stateless Guard)**
+The most basic form of protection, operating at the Network Layer (Layer 3). It inspects individual packets in isolation based on a set of Access Control Lists (ACLs).
+
+**Functions:** Checks Source/Destination IP, Port numbers, and Protocol (TCP/UDP).
+
+**Pros:** Extremely fast; low impact on network performance; inexpensive.
+
+**Cons:** "Stateless"—it doesn't remember if a packet is part of an existing conversation. High risk of IP spoofing and can't defend against complex attacks.
+
+**2. Dynamic Packet Filtering (Stateful Inspection)**
+An evolution that tracks the state of active connections. It doesn't just look at one packet; it looks at the whole "conversation."
+
+**Functions:** Monitors the TCP Handshake (SYN/ACK). If an outgoing request is made, it dynamically opens a temporary "door" for the returning traffic.
+
+**Pros:** Much more secure than static filtering; prevents unauthorized incoming traffic that wasn't requested from inside.
+
+**Cons:** Slightly more resource-intensive; can be vulnerable to certain DoS attacks that overwhelm the "state table."
+
+**3. Proxy Firewall (Application-Level Gateway)**
+Acts as a literal middleman. The client talks to the Proxy, and the Proxy talks to the destination. They never connect directly.
+
+**Functions:** Operates at Layer 7. It inspects the actual data content (like specific HTTP commands or URLs).
+
+**Pros:** Most secure method; masks the internal network's true IP address; provides deep content filtering.
+
+**Cons:** Significant "performance tax" (latency); requires high processing power; can break some applications that don't support proxying.
+
+**4. Next-Generation Firewall (NGFW)**
+
+The modern standard. It combines the capabilities of traditional firewalls with other network device filtering functionalities.
+
+**Functions:** Deep Packet Inspection (DPI), Intrusion Prevention Systems (IPS), and encrypted traffic inspection. It doesn’t just see "Port 80"; it sees "Facebook Application inside Port 80.
+
+**"Pros:** Granular control (can allow Facebook but block FarmVille); integrates antivirus and anti-malware; identifies users, not just IPs.
+
+**Cons:** Expensive; complex to configure; can become a bottleneck if not sized correctly for the network throughput.The 
+
+**Analogy: "A Private Hostel"** 
+(From the Cloudflare reading and notesTo make the abstract concrete, I’m using the Apartment Building)
+
+The Hostel's Front Door: My Router (Public IP).
+The Security Guard: The Firewall.
+The Dorm Numbers: The Ports (Private IPs).
+The Logic: If I don't explicitly tell the Guard (Firewall) that "Dorm 80" is expecting a package (Web Traffic), his standing order is "Deny All." 
+
+This mental model helps explain why port forwarding is necessary—it's essentially leaving a note at the front desk for the guard.
+
+**The Language of the Network (Ports & Protocols)**
+
+After nailing down the perimeter, I moved to memorizing the "doors" themselves. I used the StationX "Common Ports Cheat Sheet" to map out the critical services, specifically focusing on the **Unencrypted vs. Encrypted pairings.**
+
+**1. The Critical Pairs (Insecure vs. Secure)** 
+
+I drilled these pairings to ensure I never accidentally open an insecure port in a future lab. Here are a few of them:
+
+**FTP (20/21) / FTPS (989/990):** Standard file transfer vs. encrypted file transfer.
+
+**SMTP (25) / SMTPS (465):** Sending email vs. secure email transmission.
+
+**HTTP (80) / HTTPS (443):** Standard web browsing vs. encrypted web browsing.
+
+**POP3 (110) / POP3S (995):** Standard email retrieval vs. secure retrieval.
+
+**IMAP (143) / IMAPS (993):** Email syncing vs. encrypted email syncing.
+
+**Telnet (23) / SSH (22):** Cleartext remote access vs. secure, encrypted remote access.
+
+**DNS (53):** The "phonebook" that converts domain names into IP addresses.
+
+**NTP (123):** Network Time Protocol used to keep all system clocks in sync.
+
+
+Since i need to be aware them if i want to respond in kind, I also memorized a few "Enterprise" ports used in a business network which are often the primary targets for internal attacks
+
+**Enterprise & Infrastructure Ports:**
+
+**389 (LDAP):** Used to look up users and devices in a network directory like Windows Active Directory.
+
+**636 (LDAPS):** The secure version of LDAP; it prevents "sniffing" of directory data.
+
+**445 (SMB):** Used for Windows file and printer sharing; it is a common target for lateral movement within a network.
+
+**3389 (RDP):** Remote Desktop Protocol; allows a user to see and control the desktop of a remote Windows computer.
+
+**3306 (MySQL):** A very common port for web application databases; if left open to the internet, it’s a major security risk.
+
+**161/162 (SNMP):** Used by admins to manage and monitor network devices like routers and switches.
+
+
+**Up Next:** Hands-on captures. Now that I know the port numbers, it's time to put my sacrificial router to use and check how the router firewall handles these using Wireshark.

@@ -1,4 +1,4 @@
-# Day 8: The Virtual Gateway (Layer 3 Switching & SVIs)
+# Day 9: The Virtual Gateway (Layer 3 Switching & SVIs)
 
 ## Summary:
 Yesterday, I looked at how devices talk within a single segment using ARP. Today, I tackled the "Berlin Wall" of networking: how to get devices in different VLANs to communicate without always relying on an external router. I moved away from "Router-on-a-Stick" and entered the world of **Layer 3 (Multi-layer) Switching**. 

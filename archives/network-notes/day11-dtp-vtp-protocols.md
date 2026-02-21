@@ -1,4 +1,4 @@
-# Day 9: The Automation Paradox (DTP & VTP)
+# Day 11: The Automation Paradox (DTP & VTP)
 
 ## Summary:
 Yesterday was all about Layer 3 logic, but today I went back to Layer 2 to solve a scalability problem: "How do I manage VLANs and Trunks across 50 switches without losing my mind?" Enter **DTP (Dynamic Trunking Protocol)** and **VTP (VLAN Trunking Protocol)**.

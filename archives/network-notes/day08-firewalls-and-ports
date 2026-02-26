@@ -1,12 +1,12 @@
-## Day 8: The Perimeter (Firewall Architectures) & Common Ports
+# Day 8: The Perimeter (Firewall Architectures) & Common Ports
 
-### Summary:
+## Summary
 
 After spending yesterday looking at how devices chat via ARP, today I shifted to the "Gatekeeper." If ARP is the phonebook of the local network, the Firewall is the security guard standing at the door deciding who gets to enter.
 
 I focused on the evolution of firewall logic—moving from simple "allow/deny" lists based on IP addresses to modern systems that can actually "read" the intent of the traffic at the Application Layer. I’ve mapped out the theoretical differences between the four major types of firewalls to prepare for my upcoming live traffic capture and rule-testing lab.
 
-### What I Covered:
+### What I Covered
 
 **1. Packet Filtering Firewall (The Stateless Guard)**
 The most basic form of protection, operating at the Network Layer (Layer 3). It inspects individual packets in isolation based on a set of Access Control Lists (ACLs).
@@ -35,7 +35,7 @@ Acts as a literal middleman. The client talks to the Proxy, and the Proxy talks 
 
 **Cons:** Significant "performance tax" (latency); requires high processing power; can break some applications that don't support proxying.
 
-**4. Next-Generation Firewall (NGFW)**
+### 4. Next-Generation Firewall (NGFW)
 
 The modern standard. It combines the capabilities of traditional firewalls with other network device filtering functionalities.
 
@@ -43,23 +43,23 @@ The modern standard. It combines the capabilities of traditional firewalls with 
 
 **"Pros:** Granular control (can allow Facebook but block FarmVille); integrates antivirus and anti-malware; identifies users, not just IPs.
 
-**Cons:** Expensive; complex to configure; can become a bottleneck if not sized correctly for the network throughput.The 
+**Cons:** Expensive; complex to configure; can become a bottleneck if not sized correctly for the network throughput.The
 
-**Analogy: "A Private Hostel"** 
+**Analogy: "A Private Hostel"**
 (From the Cloudflare reading and notesTo make the abstract concrete, I’m using the Apartment Building)
 
 The Hostel's Front Door: My Router (Public IP).
 The Security Guard: The Firewall.
 The Dorm Numbers: The Ports (Private IPs).
-The Logic: If I don't explicitly tell the Guard (Firewall) that "Dorm 80" is expecting a package (Web Traffic), his standing order is "Deny All." 
+The Logic: If I don't explicitly tell the Guard (Firewall) that "Dorm 80" is expecting a package (Web Traffic), his standing order is "Deny All."
 
 This mental model helps explain why port forwarding is necessary—it's essentially leaving a note at the front desk for the guard.
 
-**The Language of the Network (Ports & Protocols)**
+### The Language of the Network (Ports & Protocols)
 
 After nailing down the perimeter, I moved to memorizing the "doors" themselves. I used the StationX "Common Ports Cheat Sheet" to map out the critical services, specifically focusing on the **Unencrypted vs. Encrypted pairings.**
 
-**1. The Critical Pairs (Insecure vs. Secure)** 
+#### 1. The Critical Pairs (Insecure vs. Secure)
 
 I drilled these pairings to ensure I never accidentally open an insecure port in a future lab. Here are a few of them:
 
@@ -79,7 +79,6 @@ I drilled these pairings to ensure I never accidentally open an insecure port in
 
 **NTP (123):** Network Time Protocol used to keep all system clocks in sync.
 
-
 Since i need to be aware them if i want to respond in kind, I also memorized a few "Enterprise" ports used in a business network which are often the primary targets for internal attacks
 
 **Enterprise & Infrastructure Ports:**
@@ -95,6 +94,5 @@ Since i need to be aware them if i want to respond in kind, I also memorized a f
 **3306 (MySQL):** A very common port for web application databases; if left open to the internet, it’s a major security risk.
 
 **161/162 (SNMP):** Used by admins to manage and monitor network devices like routers and switches.
-
 
 **Up Next:** Hands-on captures. Now that I know the port numbers, it's time to put my sacrificial router to use and check how the router firewall handles these using Wireshark.

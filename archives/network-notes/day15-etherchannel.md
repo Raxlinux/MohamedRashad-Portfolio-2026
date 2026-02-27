@@ -59,7 +59,7 @@ There are two main protocols used to negotiate the formation of an EtherChannel,
 | **PAgP** | Cisco Proprietary | **Desirable** (Initiates) / **Auto** (Waits) |
 | **Static** | N/A | **On** (No negotiation; forces the channel) |
 
-> [!IMPORTANT]
+> [!NOTE]
 > Never use the `on` mode unless you are certain the other side is also set to `on`. Since there is no negotiation protocol (no "handshake"), you run a high risk of creating a switching loop if one side thinks it's a channel and the other doesn't.
 
 ---
